@@ -1,6 +1,7 @@
 package com.gzdzss.redis.example;
 
 import com.gzdzss.redis.example.service.DemoService;
+import com.gzdzss.redis.plugin.limit.RequestLimitAspect;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -30,6 +31,7 @@ public class RedisAopLockExampleApplication {
 
     /**
      * 获取锁失败 抛出异常
+     *
      * @param id
      * @return
      * @throws InterruptedException
@@ -41,6 +43,7 @@ public class RedisAopLockExampleApplication {
 
     /**
      * 获取锁失败 返回null
+     *
      * @param name
      * @return
      * @throws InterruptedException
@@ -53,6 +56,7 @@ public class RedisAopLockExampleApplication {
 
     /**
      * 获取锁失败， 发起重试
+     *
      * @param id
      * @return
      * @throws InterruptedException
@@ -63,13 +67,23 @@ public class RedisAopLockExampleApplication {
     }
 
 
+    @GetMapping("/limit")
+    @RequestLimitAspect
+    public String limit() {
+        return "ok";
+    }
+
+    @GetMapping("/limit2")
+    @RequestLimitAspect(times = 5, expire = 10)
+    public String limit2() {
+        return "ok";
+    }
+
 
     @GetMapping("/hello")
     public String hello() {
         return demoService.hello();
     }
-
-
 
 
     public static void main(String[] args) {

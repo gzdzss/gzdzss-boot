@@ -21,7 +21,7 @@ public class GzdzssRedisAutoConfiguration {
 
 
     public GzdzssRedisAutoConfiguration() {
-        log.debug("Enable Gzdzss Redis Configuration.");
+        log.info("Enable Gzdzss Redis Configuration.");
     }
 
     @Bean

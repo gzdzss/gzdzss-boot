@@ -5,4 +5,4 @@
 ## gzdzss-redis-spring-boot
 - redis分布式锁
 - 基于aop注解实现分布式锁
-- 基于aop直接实现限流（待实现）
+- 基于aop直接实现限流

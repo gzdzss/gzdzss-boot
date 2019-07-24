@@ -10,3 +10,4 @@ spring:
 logging:
   level:
     com.gzdzss.redis.plugin.lock: debug
+    com.gzdzss.redis.autoconfigure: debug

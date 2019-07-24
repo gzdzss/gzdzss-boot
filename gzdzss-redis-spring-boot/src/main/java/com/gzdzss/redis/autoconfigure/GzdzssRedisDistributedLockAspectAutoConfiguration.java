@@ -8,7 +8,6 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Configuration;
@@ -33,19 +32,17 @@ import java.lang.reflect.Method;
 @SuppressWarnings("all")
 @AutoConfigureAfter(GzdzssRedisDistributedLockAutoConfiguration.class)
 @ConditionalOnClass(ProceedingJoinPoint.class)
-public class GzdzssRedisDistributedLockAspectConfiguration {
+public class GzdzssRedisDistributedLockAspectAutoConfiguration {
 
 
-    public GzdzssRedisDistributedLockAspectConfiguration() {
-        log.debug("Annotated AOP parsing configuration with Redis distributed lock enabled.");
+    public GzdzssRedisDistributedLockAspectAutoConfiguration(DistributedLock distributedLock) {
+        this.distributedLock = distributedLock;
+        log.info("Annotated AOP parsing configuration with Redis distributed lock enabled.");
     }
-
 
     private static final String DEFAULT_CACHE_PREFIX = "com.gzdzss";
 
-    @Autowired
     private DistributedLock distributedLock;
-
     private ExpressionParser parser = new SpelExpressionParser();
     private LocalVariableTableParameterNameDiscoverer discoverer = new LocalVariableTableParameterNameDiscoverer();
 
@@ -56,7 +53,7 @@ public class GzdzssRedisDistributedLockAspectConfiguration {
         Method method = ((MethodSignature) pjp.getSignature()).getMethod();
         RedisDistributedLockAspect lockAction = method.getAnnotation(RedisDistributedLockAspect.class);
         //获取方法属性
-        String key = String.format("%s:redisdistributedlock:%s.%s:%s", DEFAULT_CACHE_PREFIX, method.getDeclaringClass().getName(), method.getName(), parse(lockAction.key(), method, pjp.getArgs()));
+        String key = String.format("%s:redisDistributedLock:%s.%s:%s", DEFAULT_CACHE_PREFIX, method.getDeclaringClass().getName(), method.getName(), parse(lockAction.key(), method, pjp.getArgs()));
         try {
             //设置重试次数
             int retryTimes = lockAction.action().equals(RedisDistributedLockAspect.LockFailAction.CONTINUE) ? lockAction.retryTimes() : 0;

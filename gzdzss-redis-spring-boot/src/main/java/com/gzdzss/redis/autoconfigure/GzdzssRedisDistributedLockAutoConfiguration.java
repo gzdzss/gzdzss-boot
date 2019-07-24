@@ -22,7 +22,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 public class GzdzssRedisDistributedLockAutoConfiguration {
 
     public GzdzssRedisDistributedLockAutoConfiguration() {
-        log.debug("Enable Gzdzss Redis Distributed Lock Configuration.");
+        log.info("Enable Gzdzss Redis Distributed Lock Configuration.");
     }
 
     @Bean
