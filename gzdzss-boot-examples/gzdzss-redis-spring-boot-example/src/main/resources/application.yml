@@ -1,0 +1,12 @@
+
+spring:
+  redis:
+    host: 192.168.30.213
+    port: 6379
+    database: 7
+    password: avm9CqFE601wgfPesIUR
+
+
+logging:
+  level:
+    com.gzdzss.redis.plugin.lock: debug

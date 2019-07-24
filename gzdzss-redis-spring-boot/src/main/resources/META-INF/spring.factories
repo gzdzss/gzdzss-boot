@@ -1,0 +1,6 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.gzdzss.redis.autoconfigure.GzdzssRedisAutoConfiguration,\
+com.gzdzss.redis.autoconfigure.GzdzssRedisDistributedLockAutoConfiguration,\
+  com.gzdzss.redis.autoconfigure.GzdzssRedisDistributedLockAspectConfiguration
+
+
