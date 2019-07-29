@@ -11,7 +11,6 @@
         <module>gzdzss-redis-spring-boot-starter</module>
 		<module>gzdzss-redis-spring-boot</module>
 		<module>gzdzss-boot-dependencies</module>
-		<module>gzdzss-boot-exmples</module>
 		<module>gzdzss-boot-examples</module>
 	</modules>
     <name>gzdzss-boot</name>
